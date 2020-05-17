@@ -8,8 +8,9 @@ public class FlickeringColorsDisplay extends JFrame {
     int MaxXSize = ((int) tk.getScreenSize().getWidth());
     int MaxYSize = ((int) tk.getScreenSize().getHeight());
     Block block = new Block();
+    FlickeringColorsPaintingArea flickeringColorsPaintingArea;
 
-    public FlickeringColorsDisplay(int blocksOnX, int blocksOnY, int frequency, int probability) {
+    public FlickeringColorsDisplay(final int blocksOnX, final int blocksOnY, final int frequency, final int probability) {
 
         int blockSize = block.getBlockSize();
         xSize = blocksOnX * blockSize;
@@ -23,5 +24,6 @@ public class FlickeringColorsDisplay extends JFrame {
         setResizable(false);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        flickeringColorsPaintingArea = new FlickeringColorsPaintingArea();
     }
 }
