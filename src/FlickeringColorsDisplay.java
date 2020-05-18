@@ -4,13 +4,19 @@ import java.awt.*;
 public class FlickeringColorsDisplay extends JFrame {
     int xSize;
     int ySize;
-    Toolkit tk = Toolkit.getDefaultToolkit();
-    int MaxXSize = ((int) tk.getScreenSize().getWidth());
-    int MaxYSize = ((int) tk.getScreenSize().getHeight());
+    double frequency;
+    double probability;
+
     Block block = new Block();
     FlickeringColorsPaintingArea flickeringColorsPaintingArea;
 
-    public FlickeringColorsDisplay(final int blocksOnX, final int blocksOnY, final int frequency, final int probability) {
+    Toolkit tk = Toolkit.getDefaultToolkit();
+    int MaxXSize = ((int) tk.getScreenSize().getWidth());
+    int MaxYSize = ((int) tk.getScreenSize().getHeight());
+
+    public FlickeringColorsDisplay(final int blocksOnX, final int blocksOnY, final double frequency, final double probability) {
+        this.frequency = frequency;
+        this.probability = probability;
 
         int blockSize = block.getBlockSize();
         xSize = blocksOnX * blockSize;
@@ -25,5 +31,6 @@ public class FlickeringColorsDisplay extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         flickeringColorsPaintingArea = new FlickeringColorsPaintingArea();
+        add(flickeringColorsPaintingArea);
     }
 }
