@@ -1,46 +1,37 @@
+import javax.swing.*;
 import java.awt.*;
+import java.util.Random;
 
-public class Block implements Runnable {
-    private int blockSize = 20;
+public class Block extends JPanel implements Runnable {
+    private double frequency;
     private double probability;
-    private double time;
-    private int x;
-    private int y;
-    private int R;
-    private int G;
-    private int B;
-    private Graphics2D graphics2D;
+    private Color color;
 
-    public Block(){
-    }
+    Random random = new Random();
 
-    public Block(double probability,double time,int x, int y, int R, int G, int B) {
+
+    public Block(double frequency, double probability) {
+        this.frequency = frequency;
         this.probability = probability;
-        this.time = time;
-        this.x = x;
-        this.y = y;
-        this.R = R;
-        this.G = G;
-        this.B = B;
+        setBackground(new Color(random.nextInt(255),random.nextInt(255),random.nextInt(255)));
     }
 
-    public void draw(Graphics2D graphics2D) {
-        this.graphics2D = graphics2D;
+    public void setColor(Color color) {
+        this.color = color;
     }
 
-    public void setColor(int R, int G, int B) {
-        this.R = R;
-        this.G = G;
-        this.B = B;
-    }
-
-    public int getBlockSize() {
-        return blockSize;
+    public Color getColor() {
+        return color;
     }
 
     @Override
     public void run() {
-        graphics2D.setColor(new Color(R, G, B));
-        graphics2D.fillRect(x * blockSize, y * blockSize, blockSize, blockSize);
+        for (int i = 0; i < 10; i++) {
+            System.out.println(i);
+        }
     }
+    // private int R;
+    // private int G;
+    //private int B;
+
 }

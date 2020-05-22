@@ -32,9 +32,12 @@ public class FlickeringColors {
         final int finalNumbersOfBlocksOnY = numbersOfBlocksOnY;
         final double finalFrequency = frequency;
         final double finalProbability = probability;
-        EventQueue.invokeLater(() -> {
-            var flickeringColorsDisplay = new FlickeringColorsDisplay(finalNumbersOfBlocksOnX, finalNumbersOfBlocksOnY, finalFrequency, finalProbability);
-            flickeringColorsDisplay.setVisible(true);
+        EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                var flickeringColorsDisplay = new FlickeringColorsDisplay(finalNumbersOfBlocksOnX, finalNumbersOfBlocksOnY, finalFrequency, finalProbability);
+                flickeringColorsDisplay.setVisible(true);
+            }
         });
     }
 }
