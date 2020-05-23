@@ -2,15 +2,16 @@ import java.awt.EventQueue;
 
 public class FlickeringColors {
     public static void main(String[] args) {
+
         int numbersOfBlocksOnX = 1;
         int numbersOfBlocksOnY = 1;
         double frequency = 1.0;
         double probability = 0.0;
         try {
-            numbersOfBlocksOnX = Integer.parseInt(args[0]);
-            numbersOfBlocksOnY = Integer.parseInt(args[1]);
-            frequency = Double.parseDouble(args[2]);
-            probability = Double.parseDouble(args[3]);
+            numbersOfBlocksOnX = 4;//Integer.parseInt(args[0]);
+            numbersOfBlocksOnY = 4;//Integer.parseInt(args[1]);
+            frequency = 1000;//Double.parseDouble(args[2]);
+            probability = 0.5;//Double.parseDouble(args[3]);
         }
         catch (NumberFormatException e) {
             System.out.println("wrong input!");
