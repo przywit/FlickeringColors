@@ -8,9 +8,9 @@ public class Block extends JPanel implements Runnable {
     private int min;
     private int max;
 
-    private volatile boolean dontDisturb = true;
-
     private Color color;
+
+    FlickeringColorsPaintingArea flickeringColorsPaintingArea;
 
     Block westBlock;
     Block eastBlock;
@@ -40,13 +40,21 @@ public class Block extends JPanel implements Runnable {
     }
 
     public void setNewColor() {
-        setBackground(new Color(random.nextInt(256),random.nextInt(256),random.nextInt(256)));
+        synchronized (flickeringColorsPaintingArea.getManager()) {
+            setBackground(new Color(random.nextInt(256), random.nextInt(256), random.nextInt(256)));
+        }
     }
     public void setNewColorBasedOnNeighbour() {
-        int R = (northBlock.getColor().getRed() + southBlock.getColor().getRed() + westBlock.getColor().getRed() + eastBlock.getColor().getRed()) / 4;
-        int G = (northBlock.getColor().getGreen() + southBlock.getColor().getGreen() + westBlock.getColor().getGreen() + eastBlock.getColor().getGreen()) / 4;
-        int B = (northBlock.getColor().getBlue() + southBlock.getColor().getBlue() + westBlock.getColor().getBlue() + eastBlock.getColor().getBlue()) / 4;
-        color = new Color(R, G, B);
+        synchronized (flickeringColorsPaintingArea.getManager()) {
+            int R = (northBlock.getColor().getRed() + southBlock.getColor().getRed() + westBlock.getColor().getRed() + eastBlock.getColor().getRed()) / 4;
+            int G = (northBlock.getColor().getGreen() + southBlock.getColor().getGreen() + westBlock.getColor().getGreen() + eastBlock.getColor().getGreen()) / 4;
+            int B = (northBlock.getColor().getBlue() + southBlock.getColor().getBlue() + westBlock.getColor().getBlue() + eastBlock.getColor().getBlue()) / 4;
+            color = new Color(R, G, B);
+        }
+    }
+
+    public void setFlickeringColorsPaintingArea(FlickeringColorsPaintingArea flickeringColorsPaintingArea) {
+        this.flickeringColorsPaintingArea = flickeringColorsPaintingArea;
     }
 
     @Override
@@ -58,13 +66,12 @@ public class Block extends JPanel implements Runnable {
             }
             try {
                 sleep(time);
-            } catch (InterruptedException e) {
+            }
+            catch (InterruptedException e) {
                 System.out.println("Thread interrupted");
             }
             if(random.nextDouble() <= probability) {
-                dontDisturb = false;
                 setNewColor();
-                dontDisturb = true;
             }
             else {
                 setNewColorBasedOnNeighbour();

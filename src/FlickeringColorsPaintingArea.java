@@ -4,6 +4,8 @@ import java.awt.*;
 
 public class FlickeringColorsPaintingArea extends JPanel {
 
+    Object manager = new Object();
+
     public FlickeringColorsPaintingArea(final int blocksOnX, final int blocksOnY, final double frequency, final double probability) {
         setLayout(new GridLayout(blocksOnX,blocksOnY));
         setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
@@ -45,9 +47,16 @@ public class FlickeringColorsPaintingArea extends JPanel {
         }
         for (int i = 0; i < blocks.length; i++) {
             add(blocks[i]);
+            blocks[i].setFlickeringColorsPaintingArea(this);
+        }
+        for (int i = 0; i < blocks.length; i++) {
             threads[i] = new Thread(blocks[i]);
             threads[i].start();
         }
+    }
+
+    public Object getManager() {
+        return manager;
     }
 }
 
