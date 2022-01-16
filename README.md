@@ -1,4 +1,4 @@
-# Multi-threaded desktop application writen on Object oriented Programming course.
+# Multi-threaded desktop application writen for 'Object oriented Programming' course.
 
  run with java FlickeringColors $numberOfBlocksOnX #numbersOfBlocksOnY $frequency $probability
  
